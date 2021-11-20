@@ -1,0 +1,4 @@
+Convert the number to a string, and use a regular expression replace.
+var commas = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+var commas = num.toLocaleString("en-US");

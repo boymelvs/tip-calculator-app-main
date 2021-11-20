@@ -1,0 +1,298 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
+
+*,
+::before,
+::after {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+:root {
+   --strong-cyan: hsl(172, 67%, 45%);
+   --very-dark-cyan: hsl(183, 100%, 15%);
+   --dark1-grayish-cyan: hsl(186, 14%, 43%);
+   --dark2-grayish-cyan: hsl(184, 14%, 56%);
+   --light1-grayish-cyan: hsl(185, 41%, 84%);
+   --light2-grayish-cyan: hsl(189, 41%, 97%);
+   --white: hsl(0, 0%, 100%);
+
+   --font-size-10: 62.5%; /* 10px */
+   --font-fam-space-mono: "Space Mono", monospace;
+   --font-weight-400: 400;
+   --font-weight-700: 700;
+
+   --error1: #e69900;
+   --error: hsl(0, 100%, 74%);
+
+   --reset-btn-bg-disabled: hsl(183, 78%, 25%);
+   --reset-btn-disable: hsl(184, 89%, 21%);
+}
+
+html {
+   font-size: var(--font-size-10); /* 10pixel */
+   font-family: var(--font-fam-space-mono);
+}
+
+body {
+   font-size: 1.6rem;
+   font-weight: var(--font-weight-700);
+   background-color: var(--light1-grayish-cyan);
+   color: var(--dark1-grayish-cyan);
+}
+
+footer {
+   font-size: 1.3rem;
+   text-align: center;
+   padding: 1rem;
+}
+
+footer a {
+   text-decoration: none;
+}
+
+.container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   min-width: 32rem;
+   padding-top: 3rem;
+}
+
+.main_content {
+   display: flex;
+   flex-direction: column;
+   gap: 4rem; /* between logo & calculator */
+   align-items: center;
+   max-width: 76.8rem;
+   padding: 0 1rem;
+}
+
+.calculator {
+   display: flex;
+   flex-direction: column;
+   gap: 3rem; /* between key_container & display container */
+   width: 100%;
+   padding: 4rem 3rem;
+   border-radius: 2.5rem;
+   background-color: var(--white);
+}
+
+.field input {
+   display: block;
+   font-size: 2.4rem;
+   text-align: right;
+   height: 4.8rem;
+   padding: 1rem 0;
+   border: none;
+   background-color: var(--light2-grayish-cyan);
+   font-family: var(--font-fam-space-mono);
+   font-weight: var(--font-weight-700);
+   color: var(--very-dark-cyan);
+   width: 100%;
+}
+
+.bill_container {
+   padding-bottom: 3rem; /*spacing between bill & select tip */
+}
+
+.bill {
+   background-image: url("../images/icon-dollar.svg"); /* dollar sysmbol */
+   background-position: top 1rem left 2rem;
+   background-repeat: no-repeat;
+   background-size: 1.6rem;
+}
+
+.bill_container label {
+   display: flex;
+   justify-content: space-between;
+}
+
+.bill_error {
+   display: none;
+   color: var(--error);
+}
+
+/* for js classes showing warning message */
+.bill_error.active {
+   display: unset;
+}
+
+/* for js classes red color border if error */
+.bill.active {
+   border: 0.2rem solid var(--error);
+}
+
+.field input::placeholder {
+   color: var(--very-dark-cyan);
+}
+
+.field input:focus {
+   outline: none;
+   border: 0.2rem solid var(--strong-cyan);
+}
+
+.select_tip_container {
+   display: grid;
+   grid-template-columns: repeat(12, 1fr);
+   gap: 1rem; /* between each tip button */
+   padding-bottom: 3rem; /* spacing between # of people */
+}
+
+.select_tip {
+   grid-column: span 12; /* width of select tip text */
+}
+
+.tip {
+   grid-column: span 6; /* width of each tip button */
+}
+
+.tip button {
+   font-size: 2.4rem;
+   padding: 0.5rem;
+   color: var(--light2-grayish-cyan);
+   font-family: var(--font-fam-space-mono);
+   font-weight: var(--font-weight-400);
+   background-color: var(--very-dark-cyan);
+   border: none;
+   border-radius: 0.5rem;
+   width: 100%;
+}
+
+.tip button:hover {
+   cursor: pointer;
+   color: var(--very-dark-cyan);
+   background-color: var(--light1-grayish-cyan);
+   font-weight: var(--font-weight-700);
+}
+
+/* for js classes activate when/after click */
+.tip button.active {
+   color: var(--very-dark-cyan);
+   background-color: var(--strong-cyan);
+   font-weight: var(--font-weight-700);
+}
+
+.custom::placeholder {
+   opacity: 0.5;
+}
+
+.num_people {
+   background-image: url("../images/icon-person.svg"); /* person sysmbol */
+   background-position: top 1.5rem left 2rem;
+   background-repeat: no-repeat;
+   background-size: 1.6rem;
+}
+
+.people_container label {
+   display: flex;
+   justify-content: space-between;
+}
+
+.num_people_error {
+   display: none;
+   color: var(--error);
+}
+
+/* for js classes showing warning message */
+.num_people_error.active {
+   display: unset;
+}
+
+/* for js classes red color border if error */
+.num_people.active {
+   border: 0.2rem solid var(--error);
+}
+
+.display_container {
+   display: flex;
+   flex-direction: column;
+   gap: 2.5rem; /* between tip amount, total amount & reset button */
+   border-radius: 1.5rem;
+   padding: 3rem 2rem;
+   background-color: var(--very-dark-cyan);
+}
+
+.tip_amount_container,
+.total_amount_container {
+   display: flex;
+   justify-content: space-between;
+   color: var(--light2-grayish-cyan);
+}
+
+.tip_per_person span,
+.total_per_person span {
+   display: block;
+   font-size: 1.4rem;
+   color: var(--dark2-grayish-cyan);
+}
+
+.tip_amount,
+.total_amount {
+   font-size: 3rem;
+   color: var(--strong-cyan);
+}
+
+.reset button {
+   font-size: 2rem;
+   font-family: var(--font-fam-space-mono);
+   font-weight: var(--font-weight-700);
+   color: var(--very-dark-cyan);
+   padding: 1rem;
+   border: none;
+   border-radius: 0.5rem;
+   background-color: var(--strong-cyan);
+   width: 100%;
+}
+
+.reset button:hover {
+   cursor: pointer;
+   background-color: var(--light1-grayish-cyan);
+}
+
+/* for js classes disabled reset button */
+.reset button.active {
+   pointer-events: none;
+   background-color: var(--reset-btn-bg-disabled);
+   color: var(--reset-btn-disable);
+}
+
+/* ================= desktop screen size here ================= */
+@media (min-width: 768px) {
+   .container {
+      min-height: 100vh;
+      min-width: 76.8rem;
+      padding-top: 0rem;
+   }
+
+   .main_content {
+      max-width: 90rem;
+   }
+
+   .calculator {
+      flex-direction: row;
+
+      /* split key_container & display evenly */
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+   }
+
+   .key_container {
+      grid-column: span 6; /* max width key_container */
+   }
+
+   .tip {
+      grid-column: span 4; /* width of each tip button */
+   }
+
+   .display_container {
+      grid-column: span 6; /* max width of display */
+      padding: 4rem 4rem 0 4rem;
+      gap: 4rem;
+   }
+
+   .total_amount_container {
+      margin-bottom: 5rem;
+   }
+}

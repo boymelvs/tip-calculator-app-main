@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="description" content="this is a solution to tip calculator app challenge from frontend mentor" />
+      <meta name="keyword" content="html, css, flexbox, grid, javascripts" />
+      <meta name="author" content="melvin" />
+
+      <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
+
+      <link rel="stylesheet" href="./styles/styles.css" />
+
+      <title>Frontend Mentor | Tip calculator app</title>
+   </head>
+   <body>
+      <div class="container">
+         <main class="main_content">
+            <div class="logo_container">
+               <img src="./images/logo.svg" alt="splitter" class="logo" />
+            </div>
+
+            <div class="calculator">
+               <!-- /* keypad is here */ -->
+               <section class="key_container">
+                  <!-- /* bill input */ -->
+                  <div class="field bill_container">
+                     <label for="bill"
+                        >Bill
+                        <span class="bill_error">Incorrect bill</span>
+                     </label>
+                     <input type="number" class="bill" id="bill" placeholder="0" />
+                  </div>
+
+                  <div class="select_tip_container">
+                     <label for="custom" class="select_tip">Select Tip %</label>
+
+                     <div class="tip">
+                        <button type="button" class="btn" value="5">5%</button>
+                     </div>
+
+                     <div class="tip">
+                        <button type="button" class="btn" value="10">10%</button>
+                     </div>
+
+                     <div class="tip">
+                        <button type="button" class="btn" value="15">15%</button>
+                     </div>
+
+                     <div class="tip">
+                        <button type="button" class="btn" value="25">25%</button>
+                     </div>
+
+                     <div class="tip">
+                        <button type="button" class="btn" value="50">50%</button>
+                     </div>
+
+                     <!-- /* custom tip */ -->
+                     <div class="field tip">
+                        <input type="number" class="custom" id="custom" placeholder="Custom" />
+                     </div>
+                  </div>
+
+                  <!-- /* input number of peple */ -->
+                  <div class="field people_container">
+                     <label for="people">Number of People <span class="num_people_error">Can't be zero</span></label>
+                     <input type="number" class="num_people" id="people" placeholder="0" />
+                  </div>
+               </section>
+
+               <!-- /* display is here */ -->
+               <section class="display_container">
+                  <div class="tip_amount_container">
+                     <p class="tip_per_person">
+                        Tip Amount
+                        <span>/ person</span>
+                     </p>
+
+                     <!-- /* tip amount */ -->
+                     <p class="currency">
+                        <span class="tip_amount">$0.00</span>
+                     </p>
+                  </div>
+
+                  <div class="total_amount_container">
+                     <p class="total_per_person">
+                        Total
+                        <span>/ person</span>
+                     </p>
+
+                     <!-- /* total amount */ -->
+                     <p class="currency">
+                        <span class="total_amount">$0.00</span>
+                     </p>
+                  </div>
+                  <div class="reset">
+                     <button type="reset" class="btn active" value="reset">RESET</button>
+                  </div>
+               </section>
+            </div>
+         </main>
+
+         <footer class="attribution">
+            Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank" rel="noreferrer noopener">Frontend Mentor</a>. Coded by
+            <a href="https://github.com/boymelvs" target="_blank" rel="noreferrer noopener">boymelvs</a>.
+         </footer>
+      </div>
+      <script src="./scripts/index.js"></script>
+   </body>
+</html>
