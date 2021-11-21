@@ -1,51 +1,93 @@
 "use strict";
 
-/* check if field is empty */
-const isFieldEmpty = (fields) => {
-   let empty = true;
-   for (let i = 0; i < fields.length; i++) {
-      if (fields[i].value !== "" || fields[i] === "0") {
-         empty = false;
+const search = (datas, d_key) => {
+   let isEmpty = true;
+
+   datas.forEach((data, key) => {
+      if (d_key === key) {
+         data.classList.add("active");
+      } else if (data.classList.contains("active")) {
+         data.classList.remove("active");
       }
-   }
-   return empty;
+
+      if (data.value !== "") {
+         /* check input field to enabled reset button */
+         isEmpty = false;
+      }
+   });
+
+   return isEmpty;
 };
 
-/* if field is empty disable reset button */
-const resetBtnActive = (fields) => {
-   const resetBtn = document.querySelector(".reset .btn");
+/* ================= if field is empty disable reset button ================= */
+const btnActivate = (fields, key) => {
+   const getResetBtn = document.querySelector(".reset .btn");
+   const warning = document.querySelector(".num_people_error");
 
-   if (!isFieldEmpty(fields)) {
-      resetBtn.classList.remove("active");
+   if (fields.type === "reset") {
+      getResetBtn.classList.add("active");
+   } else if (!search(fields, key)) {
+      getResetBtn.classList.remove("active");
    } else {
-      resetBtn.classList.add("active");
+      getResetBtn.classList.add("active");
    }
 };
 
-/* clear all field */
-const reset = (fields, value) => {
-   if (value === "reset") {
-      fields.forEach((field) => {
-         field.value = "";
-         resetBtnActive(0);
-      });
+/* ================= calculate ================= */
+const getTotalAmount = document.querySelector(".total_amount");
+const getTipAmount = document.querySelector(".tip_amount");
+let bill = 0,
+   people = 0,
+   tip = 0;
+
+const calculate = (name, value) => {
+   if (name.id === "bill") {
+      bill = Number(value);
    }
+
+   if (name.id === "people") {
+      people = Number(value);
+   }
+
+   if (name.id === "custom" || name.type === "button") {
+      tip = Number(value) === 0 ? "" : Number(value) / 100;
+   }
+
+   if (name.type === "reset") {
+      reset(name, value);
+   }
+
+   let tipAmnt = bill <= 0 || bill / people === Infinity ? "0.00" : ((bill / people) * tip).toFixed(2);
+   let totalAmnt = bill <= 0 || bill / people === Infinity ? "0.00" : ((bill / people) * (1 + tip)).toFixed(2);
+
+   getTipAmount.innerHTML = tipAmnt;
+   getTotalAmount.innerHTML = totalAmnt;
 };
 
-/* waiting for changes in input field */
-const fields = document.querySelectorAll(".field input");
+/* ================= waiting for changes in input field ================= */
+const getAllfields = document.querySelectorAll(".field input");
 
-fields.forEach((field, key) => {
+getAllfields.forEach((field, key) => {
    field.addEventListener("input", (event) => {
-      resetBtnActive(fields);
+      btnActivate(getAllfields, key);
+      calculate(event.target, event.target.value);
    });
 });
 
 /* waiting for click */
-const btns = document.querySelectorAll(".btn");
+const getAllbtns = document.querySelectorAll(".btn");
 
-btns.forEach((btn, key) => {
+getAllbtns.forEach((btn, key) => {
    btn.addEventListener("click", (event) => {
-      reset(fields, event.target.value);
+      calculate(event.target, event.target.value);
    });
 });
+
+/* ================= clear all ================= */
+const reset = (name, value) => {
+   getAllfields.forEach((field) => {
+      field.value = "";
+      (bill = 0), (people = 0), (tip = 0);
+   });
+   btnActivate(name, value);
+};

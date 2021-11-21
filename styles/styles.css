@@ -228,12 +228,14 @@ footer a {
    color: var(--dark2-grayish-cyan);
 }
 
+.currency,
 .tip_amount,
 .total_amount {
    font-size: 3rem;
    color: var(--strong-cyan);
 }
 
+/* for js classes disabled reset button */
 .reset button {
    font-size: 2rem;
    font-family: var(--font-fam-space-mono);
@@ -246,16 +248,15 @@ footer a {
    width: 100%;
 }
 
-.reset button:hover {
-   cursor: pointer;
-   background-color: var(--light1-grayish-cyan);
-}
-
-/* for js classes disabled reset button */
 .reset button.active {
    pointer-events: none;
    background-color: var(--reset-btn-bg-disabled);
    color: var(--reset-btn-disable);
+}
+
+.reset button:hover {
+   cursor: pointer;
+   background-color: var(--light1-grayish-cyan);
 }
 
 /* ================= desktop screen size here ================= */
@@ -271,8 +272,6 @@ footer a {
    }
 
    .calculator {
-      flex-direction: row;
-
       /* split key_container & display evenly */
       display: grid;
       grid-template-columns: repeat(12, 1fr);
