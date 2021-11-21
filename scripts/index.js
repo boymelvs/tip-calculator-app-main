@@ -1,6 +1,6 @@
 "use strict";
 
-const search = (datas, d_key) => {
+const isFieldEmpty = (datas, d_key) => {
    let isEmpty = true;
 
    datas.forEach((data, key) => {
@@ -26,10 +26,12 @@ const btnActivate = (fields, key) => {
 
    if (fields.type === "reset") {
       getResetBtn.classList.add("active");
-   } else if (!search(fields, key)) {
+   } else if (!isFieldEmpty(fields, key)) {
       getResetBtn.classList.remove("active");
+      warning.classList.remove("active");
    } else {
       getResetBtn.classList.add("active");
+      warning.classList.add("active");
    }
 };
 
