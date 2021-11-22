@@ -1,22 +1,28 @@
 "use strict";
 
 const isFieldEmpty = (datas, d_key) => {
+   const getResetBtn = document.querySelector(".reset .btn");
    let isEmpty = true;
 
    datas.forEach((data, key) => {
+      /* tip btn activate */
       if (d_key === key) {
          data.classList.add("active");
       } else if (data.classList.contains("active")) {
          data.classList.remove("active");
       }
 
+      /* reset btn activate when input not empty */
       if (data.value !== "") {
-         /* check input field to enabled reset button */
+         getResetBtn.classList.remove("active");
          isEmpty = false;
       }
    });
 
-   return isEmpty;
+   /* reset btn deactivate when input is empty */
+   if (isEmpty) {
+      getResetBtn.classList.add("active");
+   }
 };
 
 /* ================= if field is empty disable reset button ================= */
@@ -71,7 +77,8 @@ const getAllfields = document.querySelectorAll(".field input");
 
 getAllfields.forEach((field, key) => {
    field.addEventListener("input", (event) => {
-      btnActivate(getAllfields, key);
+      // btnActivate(getAllfields, key);
+      isFieldEmpty(getAllfields, key);
       calculate(event.target, event.target.value);
    });
 });
@@ -82,6 +89,7 @@ const getAllbtns = document.querySelectorAll(".btn");
 getAllbtns.forEach((btn, key) => {
    btn.addEventListener("click", (event) => {
       calculate(event.target, event.target.value);
+      isFieldEmpty(getAllbtns, key);
    });
 });
 
@@ -91,5 +99,4 @@ const reset = (name, value) => {
       field.value = "";
       (bill = 0), (people = 0), (tip = 0);
    });
-   btnActivate(name, value);
 };
