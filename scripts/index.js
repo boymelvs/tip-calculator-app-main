@@ -87,8 +87,8 @@ const calculateTip = (name, value) => {
    let tipAmnt = bill <= 0 || people <= 0 || bill / people === Infinity ? "0.00" : ((bill * tips) / people).toFixed(2);
    let totalAmnt = bill <= 0 || people <= 0 || bill / people === Infinity ? "0.00" : ((bill * (1 + tips)) / people).toFixed(2);
 
-   tipAmountEl.innerText = tipAmnt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-   totalAmountEl.innerText = totalAmnt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+   tipAmountEl.innerHTML = tipAmnt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+   totalAmountEl.innerHTML = totalAmnt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
 /* ================= waiting for changes in input field ================= */
@@ -102,15 +102,17 @@ fieldsEl.forEach((field, key) => {
 
       /* limit the digit */
       if (value.length > 7) {
-         value = value.slice(0, 7);
+         e.target.value = value.slice(0, -1);
+
+         console.log(e.target.value);
       }
 
       /* allow numbers only */
       if (e.target.id === "people" && !rgxWholeNum.test(value)) {
-         value = "";
+         e.target.value = "";
          calculateTip(e.target, 0);
       } else if (!rgxWithDecimal.test(value)) {
-         value = "";
+         e.target.value = "";
       } else {
          calculateTip(e.target, value);
       }
