@@ -248,7 +248,7 @@ footer a {
    width: 100%;
 }
 
-.reset button.active {
+.reset button.disabled {
    pointer-events: none;
    background-color: var(--reset-btn-bg-disabled);
    color: var(--reset-btn-disable);
