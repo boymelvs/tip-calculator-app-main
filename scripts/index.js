@@ -87,24 +87,32 @@ const calculateTip = (name, value) => {
    let tipAmnt = bill <= 0 || people <= 0 || bill / people === Infinity ? "0.00" : ((bill * tips) / people).toFixed(2);
    let totalAmnt = bill <= 0 || people <= 0 || bill / people === Infinity ? "0.00" : ((bill * (1 + tips)) / people).toFixed(2);
 
-   tipAmountEl.innerHTML = tipAmnt;
-   totalAmountEl.innerHTML = totalAmnt;
+   tipAmountEl.innerText = tipAmnt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+   totalAmountEl.innerText = totalAmnt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
 /* ================= waiting for changes in input field ================= */
 const fieldsEl = document.querySelectorAll(".field input");
 
 fieldsEl.forEach((field, key) => {
-   field.addEventListener("input", (event) => {
+   field.addEventListener("input", (e) => {
       const rgxWholeNum = /^[0-9]+$/;
       const rgxWithDecimal = /^(\d+\.?\d*|\.\d+)$/;
+      let value = e.target.value;
 
-      if (event.target.id === "people" && !rgxWholeNum.test(event.target.value)) {
-         event.target.value = "";
-      } else if (!rgxWithDecimal.test(event.target.value)) {
-         event.target.value = "";
+      /* limit the digit */
+      if (value.length > 7) {
+         value = value.slice(0, 7);
+      }
+
+      /* allow numbers only */
+      if (e.target.id === "people" && !rgxWholeNum.test(value)) {
+         value = "";
+         calculateTip(e.target, 0);
+      } else if (!rgxWithDecimal.test(value)) {
+         value = "";
       } else {
-         calculateTip(event.target, event.target.value);
+         calculateTip(e.target, value);
       }
 
       isFieldEmpty(fieldsEl, key);
@@ -115,8 +123,8 @@ fieldsEl.forEach((field, key) => {
 const btnsEl = document.querySelectorAll(".btn");
 
 btnsEl.forEach((btn, key) => {
-   btn.addEventListener("click", (event) => {
-      calculateTip(event.target, event.target.value);
+   btn.addEventListener("click", (e) => {
+      calculateTip(e.target, e.target.value);
       isFieldEmpty(btnsEl, key);
    });
 });

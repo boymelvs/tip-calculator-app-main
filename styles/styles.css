@@ -126,6 +126,7 @@ footer a {
 
 .tip {
    grid-column: span 6; /* width of each tip button */
+   width: 100%;
 }
 
 .tip button {
@@ -278,11 +279,11 @@ footer a {
 
    .display_container {
       grid-column: span 6; /* max width of display */
-      padding: 4rem 4rem 0 4rem;
+      padding: 4rem 4rem 2rem 4rem;
       gap: 4rem;
    }
 
-   .total_amount_container {
-      margin-bottom: 5rem;
+   .reset button {
+      margin-top: 5rem;
    }
 }
