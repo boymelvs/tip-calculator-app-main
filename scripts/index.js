@@ -84,8 +84,8 @@ const calculateTip = (name, value) => {
 
    let tips = tip === 0 ? customTip : tip;
 
-   let tipAmnt = bill <= 0 || people <= 0 || bill / people === Infinity ? "0.00" : ((bill / people) * tips).toFixed(2);
-   let totalAmnt = bill <= 0 || people <= 0 || bill / people === Infinity ? "0.00" : ((bill / people) * (1 + tips)).toFixed(2);
+   let tipAmnt = bill <= 0 || people <= 0 || bill / people === Infinity ? "0.00" : ((bill * tips) / people).toFixed(2);
+   let totalAmnt = bill <= 0 || people <= 0 || bill / people === Infinity ? "0.00" : ((bill * (1 + tips)) / people).toFixed(2);
 
    tipAmountEl.innerHTML = tipAmnt;
    totalAmountEl.innerHTML = totalAmnt;
