@@ -16,3 +16,39 @@ function addCommas(nStr)
     }
     return x1 + x2;
 }
+
+
+const calculate = (name, value) => {
+   /* get bill value */
+   if (name.id === "bill") {
+      bill = Number(value);
+   }
+
+   /* get how many people */
+   if (name.id === "people") {
+      people = Number(value);
+   }
+
+   /* get custom tip percentage */
+   if (name.id === "custom") {
+      tip = 0;
+      customTip = Number(value) / 100;
+   }
+
+   /* get tip percentage from button */
+   if (name.type === "button") {
+      tip = Number(value) / 100;
+   }
+
+   if (name.type === "reset") {
+      reset(value);
+   }
+
+   let tips = tip === 0 ? customTip : tip;
+
+   let tipAmnt = bill <= 0 || people <= 0 || bill / people === Infinity ? "0.00" : ((bill / people) * tips).toFixed(2);
+   let totalAmnt = bill <= 0 || people <= 0 || bill / people === Infinity ? "0.00" : ((bill / people) * (1 + tips)).toFixed(2);
+
+   tipAmountEl.innerHTML = tipAmnt;
+   totalAmountEl.innerHTML = totalAmnt;
+};

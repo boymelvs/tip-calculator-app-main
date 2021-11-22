@@ -104,26 +104,6 @@ footer a {
    background-size: 1.6rem;
 }
 
-.bill_container label {
-   display: flex;
-   justify-content: space-between;
-}
-
-.bill_error {
-   display: none;
-   color: var(--error);
-}
-
-/* for js classes showing warning message */
-.bill_error.active {
-   display: unset;
-}
-
-/* for js classes red color border if error */
-.bill.active {
-   border: 0.2rem solid var(--error);
-}
-
 .field input::placeholder {
    color: var(--very-dark-cyan);
 }
@@ -174,6 +154,12 @@ footer a {
    font-weight: var(--font-weight-700);
 }
 
+.field .custom.active {
+   color: var(--very-dark-cyan);
+   /* background-color: var(--strong-cyan); */
+   font-weight: var(--font-weight-700);
+}
+
 .custom::placeholder {
    opacity: 0.5;
 }
@@ -202,6 +188,11 @@ footer a {
 
 /* for js classes red color border if error */
 .num_people.active {
+   border: 0.2rem solid var(--error);
+}
+
+/* for js classes red color border if error */
+.num_people:focus.active {
    border: 0.2rem solid var(--error);
 }
 
