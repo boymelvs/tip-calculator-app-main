@@ -45,16 +45,6 @@ const isFieldEmpty = (datas, d_key) => {
    }
 };
 
-/* reduce fontsize of amount display once number digit increase */
-const reduceFontsize = (totalAmnt) => {
-   const displays = document.querySelectorAll(".display_num");
-
-   displays.forEach((display) => {
-      let base = "base";
-      display.style.setProperty(`--${base}`, (base = totalAmnt.length <= 10 ? "3rem" : `${34 - totalAmnt.length}px`));
-   });
-};
-
 /* ================= computation is here ================= */
 let bill = 0,
    people = 0,
@@ -68,18 +58,18 @@ const calculateTip = (name, value) => {
    switch (name.id) {
       /* get bill value */
       case "bill":
-         bill = Number(value);
+         bill = value;
          break;
 
       /* get how many people */
       case "people":
-         people = Number(value);
+         people = value;
          break;
 
       /* get custom tip percentage */
       case "custom":
          tip = 0;
-         customTip = Number(value) / 100;
+         customTip = value / 100;
          break;
 
       case "reset":
@@ -89,7 +79,7 @@ const calculateTip = (name, value) => {
       /* get tip percentage from button */
       default:
          customTip = 0;
-         tip = Number(value) / 100;
+         tip = value / 100;
    }
 
    /* total tip & amount computation is here */
@@ -99,11 +89,9 @@ const calculateTip = (name, value) => {
 
    let totalAmnt = bill <= 0 || bill / people === Infinity ? "0.00" : ((bill * (1 + tips)) / people).toFixed(2);
 
-   tipAmountEl.innerHTML = Number(tipAmnt).toLocaleString();
-   totalAmountEl.innerHTML = Number(totalAmnt).toLocaleString();
-
-   /* reduce fontsize of display once num of digit increasing */
-   reduceFontsize(totalAmnt);
+   /* display the result */
+   tipAmountEl.innerHTML = totalAmnt.length <= 11 ? Number(tipAmnt).toLocaleString() : Number(tipAmnt).toExponential(4);
+   totalAmountEl.innerHTML = totalAmnt.length <= 11 ? Number(totalAmnt).toLocaleString() : Number(totalAmnt).toExponential(4);
 };
 
 /* ================= waiting for changes in input field ================= */

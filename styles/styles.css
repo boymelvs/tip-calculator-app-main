@@ -27,8 +27,6 @@
 
    --reset-btn-bg-disabled: hsl(183, 78%, 25%);
    --reset-btn-disable: hsl(184, 89%, 21%);
-
-   --base: 3rem;
 }
 
 html {
@@ -210,14 +208,17 @@ footer a {
    border-radius: 1.5rem;
    padding: 3rem 2rem;
    background-color: var(--very-dark-cyan);
+   width: 100%;
 }
 
 .tip_amount_container,
 .total_amount_container {
    display: flex;
    justify-content: space-between;
+   gap: 1rem;
    align-items: center;
    color: var(--light2-grayish-cyan);
+   width: 100%;
 }
 
 .tip_per_person span,
@@ -288,13 +289,7 @@ footer a {
       grid-column: span 6; /* max width of display */
       padding: 4rem 4rem 2rem 4rem;
       gap: 4rem;
-   }
-
-   .currency,
-   .tip_amount,
-   .total_amount {
-      font-size: var(--base);
-      color: var(--strong-cyan);
+      width: 100%;
    }
 
    .reset button {
