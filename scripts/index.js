@@ -122,7 +122,7 @@ fieldsEl.forEach((field, key) => {
 
          /* allow whole numbers only */
       } else if (e.target.id === "people" && !rgxWholeNum.test(value)) {
-         e.target.value = 0;
+         e.target.value = "";
          calculateTip(e.target, 0);
 
          /* allow whole & decimal numbers only */
