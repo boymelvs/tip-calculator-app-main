@@ -18,12 +18,14 @@
       <div class="container">
          <main class="main_content">
             <div class="logo_container">
+               <h1 class="title">Splitter Tip Calculator</h1>
                <img src="./images/logo.svg" alt="splitter" class="logo" />
             </div>
 
             <div class="calculator">
                <!-- /* keypad is here */ -->
-               <div class="key_container">
+               <section class="key_container">
+                  <h2 class="title">Keypad</h2>
                   <!-- /* bill input */ -->
                   <div class="field bill_container">
                      <label for="bill">Bill </label>
@@ -64,10 +66,11 @@
                      <label for="people">Number of People <span class="num_people_error">Can't be zero</span></label>
                      <input type="number" class="num_people" id="people" placeholder="0" />
                   </div>
-               </div>
+               </section>
 
                <!-- /* display is here */ -->
-               <div class="display_container">
+               <section class="display_container">
+                  <h2 class="title">Display The Amount</h2>
                   <div class="tip_amount_container display_num">
                      <p class="tip_per_person">
                         Tip Amount
@@ -90,7 +93,7 @@
                   <div class="reset">
                      <button type="reset" class="btn disabled" id="reset" value="reset">RESET</button>
                   </div>
-               </div>
+               </section>
             </div>
          </main>
 

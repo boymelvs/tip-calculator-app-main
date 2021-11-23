@@ -68,7 +68,7 @@ const calculateTip = (name, value) => {
    switch (name.id) {
       /* get bill value */
       case "bill":
-         bill = Number(value) === "" ? 0 : Number(value);
+         bill = Number(value);
          break;
 
       /* get how many people */
@@ -128,10 +128,14 @@ fieldsEl.forEach((field, key) => {
          /* allow whole & decimal numbers only */
       } else if (!rgxWithDecimal.test(value)) {
          e.target.value = "";
+         calculateTip(e.target, 0);
+
+         /* start to compute */
       } else {
          calculateTip(e.target, value);
       }
 
+      /* activate/deactivate reset_btn */
       isFieldEmpty(fieldsEl, key);
    });
 });
@@ -141,7 +145,10 @@ const btnsEl = document.querySelectorAll(".btn");
 
 btnsEl.forEach((btn, key) => {
    btn.addEventListener("click", (e) => {
-      calculateTip(e.target, e.target.value);
+      let value = e.target.value;
+      calculateTip(e.target, value);
+
+      /* activate/deactivate tip_btn */
       isFieldEmpty(btnsEl, key);
    });
 });

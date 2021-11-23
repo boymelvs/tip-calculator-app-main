@@ -71,6 +71,10 @@ footer a {
    padding: 0 1rem;
 }
 
+.title {
+   display: none;
+}
+
 .calculator {
    display: flex;
    flex-direction: column;
