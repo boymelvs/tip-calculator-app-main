@@ -45,6 +45,16 @@ const isFieldEmpty = (datas, d_key) => {
    }
 };
 
+/* reduce fontsize of amount display once number digit increase */
+const reduceFontsize = (totalAmnt) => {
+   const currencies = document.querySelectorAll(".currency");
+
+   currencies.forEach((currency) => {
+      let base = "base";
+      currency.style.setProperty(`--${base}`, (base = totalAmnt.length <= 10 ? "3rem" : `${34 - totalAmnt.length}px`));
+   });
+};
+
 /* ================= computation is here ================= */
 let bill = 0,
    people = 0,
@@ -82,15 +92,17 @@ const calculateTip = (name, value) => {
          tip = Number(value) / 100;
    }
 
+   /* total tip & amount computation is here */
    let tips = tip === 0 ? customTip : tip;
 
-   let tipAmnt = bill <= 0 || people <= 0 || bill / people === Infinity ? "0.00" : ((bill * tips) / people).toFixed(2);
-   let totalAmnt = bill <= 0 || people <= 0 || bill / people === Infinity ? "0.00" : ((bill * (1 + tips)) / people).toFixed(2);
+   let tipAmnt = bill <= 0 || bill / people === Infinity ? "0.00" : ((bill * tips) / people).toFixed(2);
+   let totalAmnt = bill <= 0 || bill / people === Infinity ? "0.00" : ((bill * (1 + tips)) / people).toFixed(2);
 
-   tipAmountEl.innerHTML = tipAmnt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-   totalAmountEl.innerHTML = totalAmnt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+   tipAmountEl.innerHTML = Number(tipAmnt).toLocaleString();
+   totalAmountEl.innerHTML = Number(totalAmnt).toLocaleString();
 
-   console.log(totalAmnt.length, totalAmnt);
+   /* reduce fontsize of display once num of digit increasing */
+   reduceFontsize(totalAmnt);
 };
 
 /* ================= waiting for changes in input field ================= */
@@ -98,12 +110,13 @@ const fieldsEl = document.querySelectorAll(".field input");
 
 fieldsEl.forEach((field, key) => {
    field.addEventListener("input", (e) => {
+      /* regular expression */
       const rgxWholeNum = /^[0-9]+$/;
       const rgxWithDecimal = /^(\d+\.?\d*|\.\d+)$/;
       let value = e.target.value;
 
       /* limit the digit */
-      if (value.length > 7) {
+      if (value.length > 16) {
          e.target.value = value.slice(0, -1);
 
          /* allow whole numbers only */

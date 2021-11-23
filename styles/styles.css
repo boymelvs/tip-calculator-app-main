@@ -27,6 +27,8 @@
 
    --reset-btn-bg-disabled: hsl(183, 78%, 25%);
    --reset-btn-disable: hsl(184, 89%, 21%);
+
+   --base: 3rem;
 }
 
 html {
@@ -210,6 +212,7 @@ footer a {
 .total_amount_container {
    display: flex;
    justify-content: space-between;
+   align-items: center;
    color: var(--light2-grayish-cyan);
 }
 
@@ -281,6 +284,13 @@ footer a {
       grid-column: span 6; /* max width of display */
       padding: 4rem 4rem 2rem 4rem;
       gap: 4rem;
+   }
+
+   .currency,
+   .tip_amount,
+   .total_amount {
+      font-size: var(--base);
+      color: var(--strong-cyan);
    }
 
    .reset button {
