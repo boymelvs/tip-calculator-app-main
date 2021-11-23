@@ -90,8 +90,8 @@ const calculateTip = (name, value) => {
    let totalAmnt = bill <= 0 || bill / people === Infinity ? "0.00" : ((bill * (1 + tips)) / people).toFixed(2);
 
    /* display the result */
-   tipAmountEl.innerHTML = totalAmnt.length <= 11 ? Number(tipAmnt).toLocaleString() : Number(tipAmnt).toExponential(4);
-   totalAmountEl.innerHTML = totalAmnt.length <= 11 ? Number(totalAmnt).toLocaleString() : Number(totalAmnt).toExponential(4);
+   tipAmountEl.innerHTML = totalAmnt.length <= 11 ? Number(tipAmnt).toLocaleString("en", { minimumFractionDigits: 2 }) : Number(tipAmnt).toExponential(4);
+   totalAmountEl.innerHTML = totalAmnt.length <= 11 ? Number(totalAmnt).toLocaleString("en", { minimumFractionDigits: 2 }) : Number(totalAmnt).toExponential(4);
 };
 
 /* ================= waiting for changes in input field ================= */
