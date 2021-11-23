@@ -47,11 +47,11 @@ const isFieldEmpty = (datas, d_key) => {
 
 /* reduce fontsize of amount display once number digit increase */
 const reduceFontsize = (totalAmnt) => {
-   const currencies = document.querySelectorAll(".currency");
+   const displays = document.querySelectorAll(".display_num");
 
-   currencies.forEach((currency) => {
+   displays.forEach((display) => {
       let base = "base";
-      currency.style.setProperty(`--${base}`, (base = totalAmnt.length <= 10 ? "3rem" : `${34 - totalAmnt.length}px`));
+      display.style.setProperty(`--${base}`, (base = totalAmnt.length <= 10 ? "3rem" : `${34 - totalAmnt.length}px`));
    });
 };
 
@@ -68,7 +68,7 @@ const calculateTip = (name, value) => {
    switch (name.id) {
       /* get bill value */
       case "bill":
-         bill = Number(value);
+         bill = Number(value) === "" ? 0 : Number(value);
          break;
 
       /* get how many people */
@@ -96,6 +96,7 @@ const calculateTip = (name, value) => {
    let tips = tip === 0 ? customTip : tip;
 
    let tipAmnt = bill <= 0 || bill / people === Infinity ? "0.00" : ((bill * tips) / people).toFixed(2);
+
    let totalAmnt = bill <= 0 || bill / people === Infinity ? "0.00" : ((bill * (1 + tips)) / people).toFixed(2);
 
    tipAmountEl.innerHTML = Number(tipAmnt).toLocaleString();
@@ -121,7 +122,7 @@ fieldsEl.forEach((field, key) => {
 
          /* allow whole numbers only */
       } else if (e.target.id === "people" && !rgxWholeNum.test(value)) {
-         e.target.value = "";
+         e.target.value = 0;
          calculateTip(e.target, 0);
 
          /* allow whole & decimal numbers only */
