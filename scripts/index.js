@@ -89,6 +89,8 @@ const calculateTip = (name, value) => {
 
    tipAmountEl.innerHTML = tipAmnt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
    totalAmountEl.innerHTML = totalAmnt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+   console.log(totalAmnt.length, totalAmnt);
 };
 
 /* ================= waiting for changes in input field ================= */
@@ -104,13 +106,12 @@ fieldsEl.forEach((field, key) => {
       if (value.length > 7) {
          e.target.value = value.slice(0, -1);
 
-         console.log(e.target.value);
-      }
-
-      /* allow numbers only */
-      if (e.target.id === "people" && !rgxWholeNum.test(value)) {
+         /* allow whole numbers only */
+      } else if (e.target.id === "people" && !rgxWholeNum.test(value)) {
          e.target.value = "";
          calculateTip(e.target, 0);
+
+         /* allow whole & decimal numbers only */
       } else if (!rgxWithDecimal.test(value)) {
          e.target.value = "";
       } else {
