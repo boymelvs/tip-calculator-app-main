@@ -14,11 +14,6 @@ const isFieldEmpty = (datas, d_key) => {
          isEmpty = false;
       } else if (data.classList.contains("active")) {
          data.classList.remove("active");
-
-         /* to empty custom tip field once other tip button is press */
-         if (data.id === "custom") {
-            data.value = "";
-         }
       }
 
       /* show warning message */
@@ -36,6 +31,11 @@ const isFieldEmpty = (datas, d_key) => {
          isEmpty = false;
       }
    });
+
+   /* to empty custom tip field once other tip button is press */
+   if (datas[5]) {
+      datas[5].value = datas[5].value === "" ? datas[5].value : "";
+   }
 
    /* reset_btn is deactivated when input is empty */
    if (isEmpty || d_key === "reset") {
